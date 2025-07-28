@@ -2,38 +2,38 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>OPS Light Sphere (Fixed, Animated Rings)</title>
+  <title>OPS Light Sphere Centered Text</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     :root {
-      --s: 2.7s;      /* speed */
-      --d: 40;        /* delay */
-      --c: #00ffb6;   /* main OPS color */
-      --line-thick: 1.4vmin; /* ring line thickness */
+      --s: 2.7s;
+      --d: 40;
+      --c: #00ffb6;
+      --line-thick: 1.8vmin; /* Thicker rings */
     }
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
     body {
       margin: 0;
-      width: 100vw;
       height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+      background: radial-gradient(circle at 50% 100%, #101010, #000);
       display: flex;
       align-items: center;
       justify-content: center;
-      background: radial-gradient(circle at 50% 100%, #101010, #000);
       font-family: 'DM Sans', Arial, Helvetica, sans-serif;
     }
     .sphere {
-      width: 48vmin;
-      height: 48vmin;
+      width: 50vmin;
+      height: 50vmin;
       position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #ffffff04;
+      background: #fff1;
+      /* Remove animation: no global rotation */
     }
-    /* Animated rings */
+    /* Animated rings, thick and bold */
     .sphere div {
       --sz: 24vmin;
       --dv: calc(var(--s) / var(--d));
@@ -46,49 +46,53 @@
       border: var(--line-thick) solid var(--c);
       border-radius: 50%;
       box-shadow:
-        0 0 2vmin 0.6vmin var(--c),
-        0 0 0.5vmin 0.4vmin var(--c) inset;
-      opacity: 0.85;
+        0 0 2vmin 0.8vmin var(--c),
+        0 0 0.8vmin 0.7vmin var(--c) inset;
+      opacity: 0.92;
       animation: vertical-move var(--s) ease-in-out var(--dl) infinite alternate;
       background: transparent;
+      filter: blur(0.1px);
     }
-    /* Staggered sizes and delays for the 8 main rings */
-    .sphere div:nth-child(2)  { --sz: 32vmin; --dl: calc(var(--dv) * -2); }
+    /* Staggered sizes and delays for a layered 3D look */
+    .sphere div:nth-child(2)  { --sz: 30vmin; --dl: calc(var(--dv) * -2); }
     .sphere div:nth-child(3)  { --sz: 36vmin; --dl: calc(var(--dv) * -3); }
-    .sphere div:nth-child(4)  { --sz: 39vmin; --dl: calc(var(--dv) * -4); }
-    .sphere div:nth-child(5)  { --sz: 42vmin; --dl: calc(var(--dv) * -5); }
-    .sphere div:nth-child(6)  { --sz: 44vmin; --dl: calc(var(--dv) * -6); }
-    .sphere div:nth-child(7)  { --sz: 46vmin; --dl: calc(var(--dv) * -7); }
-    .sphere div:nth-child(8)  { --sz: 48vmin; --dl: calc(var(--dv) * -8); }
+    .sphere div:nth-child(4)  { --sz: 40vmin; --dl: calc(var(--dv) * -4); }
+    .sphere div:nth-child(5)  { --sz: 44vmin; --dl: calc(var(--dv) * -5); }
+    .sphere div:nth-child(6)  { --sz: 46vmin; --dl: calc(var(--dv) * -6); }
+    .sphere div:nth-child(7)  { --sz: 48vmin; --dl: calc(var(--dv) * -7); }
     @keyframes vertical-move {
       0% { transform: translate(-50%, -50%) scaleY(1.00); opacity: 1; }
-      25% { transform: translate(-50%, -54%) scaleY(1.08); opacity: 0.95; }
-      50% { transform: translate(-50%, -50%) scaleY(1.15); opacity: 0.85; }
-      75% { transform: translate(-50%, -46%) scaleY(1.08); opacity: 0.95; }
+      25% { transform: translate(-50%, -54%) scaleY(1.07); opacity: 0.98; }
+      50% { transform: translate(-50%, -50%) scaleY(1.15); opacity: 0.88; }
+      75% { transform: translate(-50%, -46%) scaleY(1.07); opacity: 0.98; }
       100% { transform: translate(-50%, -50%) scaleY(1.00); opacity: 1; }
     }
     .center-label {
       position: absolute;
-      left: 50%; top: 50%;
+      left: 50%;
+      top: 50%;
       transform: translate(-50%, -50%);
       color: #fff;
       font-family: 'DM Sans', Arial, Helvetica, sans-serif;
       font-weight: 900;
       font-size: 6vmin;
       letter-spacing: 0.13em;
-      text-shadow: 0 0 22px var(--c), 0 0 3px #000;
+      text-shadow:
+        0 0 20px var(--c),
+        0 0 10px #0f826e,
+        0 0 2px #000;
       user-select: none;
       pointer-events: none;
       white-space: nowrap;
       text-align: center;
-      line-height: 1;
-      filter: drop-shadow(0 0 4px #0ff5);
+      filter: drop-shadow(0 0 6px #0ffb);
+      z-index: 2;
     }
   </style>
 </head>
 <body>
   <div class="sphere">
-    <div></div><div></div><div></div><div></div>
+    <div></div><div></div><div></div>
     <div></div><div></div><div></div><div></div>
     <span class="center-label">OPS</span>
   </div>
